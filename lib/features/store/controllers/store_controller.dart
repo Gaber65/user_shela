@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
@@ -686,7 +685,8 @@ class StoreController extends GetxController implements GetxService {
         _lastStoreListRequestAt != null &&
         now.difference(_lastStoreListRequestAt!) < _storeListDebounce) {
       if (kDebugMode) {
-        debugPrint('🚫 StoreController.getStoreList: Debounced duplicate request '
+        debugPrint(
+            '🚫 StoreController.getStoreList: Debounced duplicate request '
             '(within ${_storeListDebounce.inMilliseconds}ms)');
       }
       return _allStoreModel;
@@ -753,7 +753,8 @@ class StoreController extends GetxController implements GetxService {
         if (kDebugMode) {
           debugPrint(
               '🔇 StoreController: SILENT_FETCH mode - preserving ${_allStoreModel!.stores!.length} cached stores during background refresh');
-          debugPrint('   - Old stores will remain visible until new data arrives');
+          debugPrint(
+              '   - Old stores will remain visible until new data arrives');
         }
       }
       _isLoading = true;
@@ -1527,7 +1528,8 @@ class StoreController extends GetxController implements GetxService {
           if (kDebugMode) {
             debugPrint(
                 '🔇 StoreController: SILENT_FETCH mode - preserving ${_popularStoreList!.length} cached popular stores during background refresh');
-            debugPrint('   - Old stores will remain visible until new data arrives');
+            debugPrint(
+                '   - Old stores will remain visible until new data arrives');
           }
         }
       }
@@ -1545,7 +1547,8 @@ class StoreController extends GetxController implements GetxService {
 
           // 🔍 SECTION 2 API DEBUG: Popular Stores
           debugPrint('🔍 SECTION 2 API - getPopularStoreList called:');
-          debugPrint('   - reload: $reload, type: $type, dataSource: $dataSource');
+          debugPrint(
+              '   - reload: $reload, type: $type, dataSource: $dataSource');
           debugPrint(
               '   - businessSettings.popularStoresSection: ${businessSettings?.popularStoresSection}');
           debugPrint('   - isEcommerce: $isEcommerce');
@@ -2912,7 +2915,8 @@ class StoreController extends GetxController implements GetxService {
         // ✅ FIX: Skip update() here - error will be shown by loadAllStoreDetails final update
       }
 
-      final CheckoutController checkoutController = Get.find<CheckoutController>();
+      final CheckoutController checkoutController =
+          Get.find<CheckoutController>();
       final bool supportsDelivery = _store?.delivery ?? true;
       final bool supportsTakeAway = _store?.takeAway ?? true;
 
@@ -4055,7 +4059,8 @@ class StoreController extends GetxController implements GetxService {
       );
 
       if (kDebugMode) {
-        debugPrint('[SearchPerf][API_DONE] storeFilter status=${response.statusCode}');
+        debugPrint(
+            '[SearchPerf][API_DONE] storeFilter status=${response.statusCode}');
       }
 
       if (response.statusCode == 200) {
@@ -4077,7 +4082,8 @@ class StoreController extends GetxController implements GetxService {
         // 🟢 حفظ النموذج بعد الترتيب
         _storeSearchItemModel = ItemModel(items: items);
         if (kDebugMode) {
-          debugPrint('[SearchPerf][PARSE_DONE] storeFilter count=${items?.length ?? 0}');
+          debugPrint(
+              '[SearchPerf][PARSE_DONE] storeFilter count=${items?.length ?? 0}');
         }
       } else {
         _hasStoreSearchError = true;
@@ -4091,7 +4097,8 @@ class StoreController extends GetxController implements GetxService {
 
     _isSearching = false;
     if (kDebugMode) {
-      debugPrint('[SearchPerf][UI_UPDATE] storeFilter error=$_hasStoreSearchError');
+      debugPrint(
+          '[SearchPerf][UI_UPDATE] storeFilter error=$_hasStoreSearchError');
     }
     update();
   }
@@ -4114,16 +4121,17 @@ class StoreController extends GetxController implements GetxService {
       }
       ItemModel? storeSearchItemModel;
       try {
-        storeSearchItemModel = await storeServiceInterface.getStoreSearchItemList(
-            searchText,
-            storeID,
-            offset,
-            type,
-            (_store != null &&
-                    _store!.categoryIds!.isNotEmpty &&
-                    _categoryIndex != 0)
-                ? _storeSpecificCategoryList![_categoryIndex].id
-                : 0);
+        storeSearchItemModel =
+            await storeServiceInterface.getStoreSearchItemList(
+                searchText,
+                storeID,
+                offset,
+                type,
+                (_store != null &&
+                        _store!.categoryIds!.isNotEmpty &&
+                        _categoryIndex != 0)
+                    ? _storeSpecificCategoryList![_categoryIndex].id
+                    : 0);
       } catch (e) {
         _hasStoreSearchError = true;
         _isSearching = false;
@@ -4281,7 +4289,8 @@ class StoreController extends GetxController implements GetxService {
   /// This prevents showing data from the previous module
   void clearAllModuleData() {
     if (kDebugMode) {
-      debugPrint('🧹 StoreController: Clearing all store lists for module switch');
+      debugPrint(
+          '🧹 StoreController: Clearing all store lists for module switch');
     }
     _popularStoreList = null;
     _latestStoreList = null;
